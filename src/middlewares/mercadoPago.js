@@ -55,7 +55,7 @@ async function generateMercadoPagoPreference(req, res) {
                 }
             ],
             back_urls: {
-                "success": `http://localhost:8080/finalizePurchase/${cid}`,
+                "success": `https://tg-ecommerce-deploy-production.up.railway.app/finalizePurchase/${cid}`,
                 "failure": "https://www.coderhouse.com/ar/",
                 "pending": "https://www.coderhouse.com/ar/"
             },
