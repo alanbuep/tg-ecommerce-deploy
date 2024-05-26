@@ -30,7 +30,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 
-const DB_URL = process.env.DB_URL; /* || "mongodb://localhost:27017/ecommerce" */
+const DB_URL = process.env.DB_URL;
 
 const chatDB = new Message();
 
@@ -76,7 +76,7 @@ const swaggerOptions = {
             contact: {
                 name: "Coderhouse",
             },
-            servers: ["http://localhost:8080"],
+            servers: ["https://tg-ecommerce-deploy-production.up.railway.app"],
         },
     },
     apis: [`${__dirname}/docs/**/*.yaml`],
