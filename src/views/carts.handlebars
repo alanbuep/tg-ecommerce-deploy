@@ -1,0 +1,16 @@
+<div class="container-fluid card-container row gap-4">
+    <h1 class="text-white text-center">Carritos:</h1>
+    {{#each carts}}
+    <div class="card container">
+        <div class="card-body text-card">
+            <h5 class="card-title">Carrito:{{this._id}}</h5>
+            <p class="card-text">Creado: {{this.timestamp}}</p>
+            {{#each this.products}}
+            <p class="card-text">Producto: {{this.product.title}}</p>
+            <p class="card-text">Producto ID: {{this.product._id}}</p>
+            <p class="card-text">Cantidad: {{this.quantity}}</p>
+            {{/each}}
+        </div>
+    </div>
+    {{/each}}
+</div>

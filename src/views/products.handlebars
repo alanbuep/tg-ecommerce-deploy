@@ -1,0 +1,72 @@
+{{#if user}}
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-sm-8 text-white text-center">
+            <h2>Bienvenido {{user}}!!</h2>
+        </div>
+        <div class="col-sm-4 text-center">
+            <button id="logout-button" class="btn btn-primary">Logout</button>
+            <button id="view-cart-button" class="btn btn-primary">Ver Carrito</button>
+            <a id="restore-password-button" class="btn btn-outline-warning">Reestablecer contraseña</a>
+        </div>
+    </div>
+</div>
+{{else}}
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-sm-8 text-white text-center">
+            <h2>Bienvenido!!</h2>
+        </div>
+        <div class="col-sm-4 text-center">
+            <button id="login" type="submit" class="btn btn-primary btn-block">Ingresar</button>
+            <button id="signup" type="submit" class="btn btn-info btn-block">Signup</button>
+        </div>
+    </div>
+</div>
+{{/if}}
+
+<div class="container-fluid card-container row gap-4">
+    <h1 class="text-white text-center">Nuestros Productos:</h1>
+    {{#each products}}
+    <div class="card container">
+        <img class="card-img-top img-card" src="{{this.thumbnail}}" alt="{{this.name}}" />
+        <div class="card-body text-card">
+            <h5 class="card-title">{{this.title}}</h5>
+            <p class="card-text">{{this.description}}</p>
+            <p class="card-text"><strong>Precio: ${{this.price}}</strong></p>
+            <p class="card-text">Stock: {{this.stock}}</p>
+            <p class="card-text">Code: {{this.code}}</p>
+            <p class="card-text">ID: {{this._id}}</p>
+        </div>
+        <button class="btn btn-primary add-to-cart" data-product-id="{{this._id}}">Agregar al carrito</button>
+    </div>
+    {{/each}}
+
+    <nav aria-label="...">
+        <ul class="pagination justify-content-center">
+            <li class="page-item {{#unless hasPrevPage}}disabled{{/unless}}">
+                <a href="/products?page={{prevPage}}" class="page-link">Previous</a>
+            </li>
+
+            {{#if hasPrevPage}}
+            <li class="page-item">
+                <a href="/products?page={{prevPage}}" class="page-link">{{prevPage}}</a>
+            </li>
+            {{/if}}
+
+            <li class="page-item active">
+                <a href="#" class="page-link">{{currentPage}}</a>
+            </li>
+
+            {{#if hasNextPage}}
+            <li class="page-item">
+                <a href="/products?page={{nextPage}}" class="page-link">{{nextPage}}</a>
+            </li>
+            {{/if}}
+
+            <li class="page-item {{#unless hasNextPage}}disabled{{/unless}}">
+                <a href="/products?page={{nextPage}}" class="page-link">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>

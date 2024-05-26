@@ -1,0 +1,98 @@
+paths:
+  /api/products:
+    get:
+      summary: Obtiene productos paginados.
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Productos obtenidos exitosamente
+          content:
+            application/json:
+              schema:
+                data: object
+                limit: number
+                quantity: number
+        "500":
+          description: Error al obtener los productos
+
+    post:
+      summary: Guarda un producto en la base de datos
+      tags:
+        - Product save
+      responses:
+        "200":
+          description: Producto guardado exitosamente
+          content:
+            application/json:
+              schema:
+                message: Producto cargado con éxito
+                data: object
+        "500":
+          description: Error interno del servidor
+
+  /api/products/{pid}:
+    get:
+      summary: Obtiene un producto por _id
+      tags:
+        - Product by ID
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: id del producto a buscar
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Producto obtenido exitosamente
+          content:
+            application/json:
+              schema:
+                message: succes
+                data: object
+        "404":
+          description: El producto no existe.
+          application/json:
+            schema:
+              message: El producto solicitado no existe
+        "500":
+          description: Error interno del servidor
+
+components:
+  schemas:
+    Products:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado de mongo
+        title:
+          type: String
+          require: true
+        description:
+          type: Stringr
+          require: true
+        code:
+          type: String
+          require: true
+          unique: true
+        price:
+          type: Number
+          require: true
+        status:
+          type: Boolean
+          require: true
+        stock:
+          type: Number
+          require: true
+        category:
+          type: String
+          require: true
+        thumbnail:
+          type: String
+          require: false
+        owner:
+          type: mongoose.Schema.Types.String
+          ref: users
+          required: true

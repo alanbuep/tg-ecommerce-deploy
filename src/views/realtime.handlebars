@@ -1,0 +1,120 @@
+{{#if user}}
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-sm-8 text-white text-center">
+            <h2>Bienvenido!!</h2>
+            <h2 id="user">{{user}}</h2>
+        </div>
+        <div class="col-sm-4 text-center">
+            <button id="logout-button" class="btn btn-primary">Logout</button>
+        </div>
+    </div>
+</div>
+{{/if}}
+
+<h1 class="text-white text-center">Administrador de Productos</h1>
+<div class="container-fluid text-white row form-container">
+    <div class="col-sm">
+        <form id="productForm">
+            <h3 class="text-white text-center">Agregar producto:</h3>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Title:</span>
+                <input id="title" type="text" class="form-control" placeholder="Obligatorio" aria-label="Username"
+                    aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Descripción:</span>
+                <input id="description" type="text" class="form-control" placeholder="Obligatorio" aria-label="Username"
+                    aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Code:</span>
+                <input id="code" type="text" class="form-control" placeholder="Obligatorio" aria-label="Username"
+                    aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Precio:</span>
+                <input id="price" type="text" class="form-control" placeholder="Obligatorio" aria-label="Username"
+                    aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Status:</span>
+                <input id="status" type="text" class="form-control" placeholder="Obligatorio" aria-label="Username"
+                    aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Stock:</span>
+                <input id="stock" type="text" class="form-control" placeholder="Obligatorio" aria-label="Username"
+                    aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Categoria:</span>
+                <input id="category" type="text" class="form-control" placeholder="Obligatorio" aria-label="Username"
+                    aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Thumbnail:</span>
+                <input id="thumbnail" type="text" class="form-control" placeholder="No obligatorio"
+                    aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <button id="addProductBtn" class="btn btn-success">Agregar</button>
+        </form>
+    </div>
+    <div class="col-sm">
+        <form id="deleteForm" style="flex: 1; margin-left: 20px;">
+            <h3>Eliminar producto:</h3>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Product ID:</span>
+                <input id="productId" type="text" class="form-control" placeholder="" aria-label="Username"
+                    aria-describedby="basic-addon1">
+            </div>
+            <button id="deleteProductBtn" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+
+<div class="container-fluid card-container row gap-4">
+    <h2 class="text-white text-center">Productos en Stock:</h2>
+    {{#each products}}
+    <div class="card container card-container">
+        <img class="card-img-top img-card" src="{{this.thumbnail}}" alt="{{this.name}}" />
+        <div class="card-body text-card">
+            <h5 class="card-title">{{this.title}}</h5>
+            <p class="card-text">{{this.description}}</p>
+            <p class="card-text"><strong>Precio: ${{this.price}}</strong></p>
+            <p class="card-text">Stock: {{this.stock}}</p>
+            <p class="card-text">Code: {{this.code}}</p>
+            <p class="card-text">ID: {{this._id}}</p>
+            <p class="card-text">Owner: {{this.owner}}</p>
+        </div>
+    </div>
+    {{/each}}
+
+    <nav aria-label="...">
+        <ul class="pagination justify-content-center">
+            <li class="page-item {{#unless hasPrevPage}}disabled{{/unless}}">
+                <a href="/realtime?page={{prevPage}}" class="page-link">Previous</a>
+            </li>
+
+            {{#if hasPrevPage}}
+            <li class="page-item">
+                <a href="/realtime?page={{prevPage}}" class="page-link">{{prevPage}}</a>
+            </li>
+            {{/if}}
+
+            <li class="page-item active">
+                <a href="#" class="page-link">{{currentPage}}</a>
+            </li>
+
+            {{#if hasNextPage}}
+            <li class="page-item">
+                <a href="/realtime?page={{nextPage}}" class="page-link">{{nextPage}}</a>
+            </li>
+            {{/if}}
+
+            <li class="page-item {{#unless hasNextPage}}disabled{{/unless}}">
+                <a href="/realtime?page={{nextPage}}" class="page-link">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>

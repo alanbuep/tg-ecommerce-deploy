@@ -1,0 +1,75 @@
+{{#if user}}
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-sm-8 text-white text-center">
+            <h2>Bienvenido, {{user}}!</h2>
+            <h2>Su carrito:</h2>
+        </div>
+    </div>
+</div>
+{{/if}}
+<div class="container-fluid">
+    <div class="container-fluid text-white">
+        <h5 class="card-title">Carrito ID: {{cart._id}}</h5>
+        <p class="card-text">Creado: {{cart.timestamp}}</p>
+    </div>
+    <h5 class="mt-4 text-white">Productos en el carrito:</h5>
+    {{#if cart.products.length}}
+    <div class="row gap-4">
+        {{#each cart.products}}
+        <div class="card product-card col-md-4">
+            <div class="card-body product-card-body">
+                <h6 class="product-title">Producto: {{this.product.title}}</h6>
+                <img class="card-img-top img-card" src="{{this.product.thumbnail}}" alt="{{this.product.title}}" />
+                <p class="product-detail"><strong>Producto ID:</strong> {{this.product._id}}</p>
+                <p class="product-detail"><strong>Cantidad:</strong> {{this.quantity}}</p>
+                <p class="price product-detail"><strong>Precio:</strong> ${{this.product.price}}</p>
+                <button class="btn btn-danger remove-from-cart" data-product-id="{{this.product._id}}">Eliminar del
+                    carrito</button>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <div class="text-center mt-4">
+        <p class="product-detail text-white"><strong>Total:</strong> ${{total}}</p>
+    </div>
+    <div class="text-center mt-4">
+        <div id="wallet_container"></div>
+
+        <button id="checkout-button" class="btn btn-success">Pagar con Mercado Pago</button>
+
+        <button id="checkout-button-2" class="btn btn-success">Finalizar sin pasarela de pago</button>
+        <p class="product-detail text-white">
+            Visa: 4509 9535 6623 3704
+        </p>
+        <p class="product-detail text-white">
+            Vencimiento: 11/25
+        </p>
+        <p class="product-detail text-white">
+            Codigo de seguridad: 123
+        </p>
+        <p class="product-detail text-white">
+            cliente:
+            user:
+            TESTUSER1670991289
+            password:
+            vGiF6q5Ge7
+        </p>
+        <p class="product-detail text-white">
+            tienda-gamer:
+            User:
+            TESTUSER1202113294
+            Password:
+            MRb1JsA6IN
+        </p>
+    </div>
+
+
+    {{else}}
+    <p class="empty-cart text-center text-white">Tu carrito está vacío.</p>
+    {{/if}}
+
+    <div class="text-center mt-4">
+        <a id="back-to-home" href="/" class="btn btn-primary">Volver al Inicio</a>
+    </div>
+</div>

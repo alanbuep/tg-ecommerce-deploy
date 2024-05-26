@@ -1,0 +1,75 @@
+paths:
+  /api/carts:
+    get:
+      summary: Obtiene todos los carritos.
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Carts obtenidos exitosamente
+          content:
+            application/json:
+              schema:
+                data: object
+        "500":
+          description: Error interno del servidor
+
+    post:
+      summary: Crea un cart en la base de datos
+      tags:
+        - Add Cart
+      responses:
+        "200":
+          description: Carrito creado exitosamente
+          content:
+            application/json:
+              schema:
+                message: Carrito creado con éxito
+                data: object
+        "500":
+          description: Error al crear el carrrito
+
+  /api/carts/{cid}:
+    get:
+      summary: Obtiene un carrito por _id
+      tags:
+        - Cart by ID
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id del carrito a buscar
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Carrito obtenido exitosamente
+          content:
+            application/json:
+              schema:
+                message: succes
+                data: object
+        "404":
+          description: Carrito no encontrado.
+          application/json:
+            schema:
+              message: Carrito no encontrado
+        "500":
+          description: Error interno del servidor
+
+components:
+  schemas:
+    Carts:
+      type: object
+      properties:
+      _id:
+            type: ObjectId
+            description: Id autogenerado de mongo
+      timestamp:
+        type: Date
+        require: true
+      products: 
+          product:
+            type: Schema.Types.ObjectId
+            ref: 'products'
+            quantity: Number
